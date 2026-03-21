@@ -3,21 +3,27 @@
 
 #include <cstdint>
 
-class Tablero {
+class Tablero{
 
 private:
+
     int ancho;
     int alto;
     uint32_t* filas;
 
 public:
-    Tablero(int w, int h);
+
+    Tablero(int w,int h);
     ~Tablero();
 
-    void imprimir();
-    bool detectarColision(uint32_t pieza, int fila);
-    void fijarPieza(uint32_t pieza, int fila);
-    void limpiarFilas();
+    void imprimir(uint32_t* pieza,int fila,int altoPieza);
+
+    bool colision(uint32_t* pieza,int fila,int altoPieza);
+
+    void fijar(uint32_t* pieza,int fila,int altoPieza);
+
+    void limpiar();
+
     bool gameOver();
 };
 

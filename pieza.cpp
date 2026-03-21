@@ -1,22 +1,58 @@
 #include "pieza.h"
+#include <cstdlib>
 
-Pieza::Pieza() {
+Pieza::Pieza(){
 
-    forma = 0b00011100;
+    int tipo = rand()%3;
+
+    if(tipo==0){
+
+        alto = 1;
+        forma[0] = 0b00011110;
+    }
+
+    if(tipo==1){
+
+        alto = 2;
+
+        forma[0] = 0b00001100;
+        forma[1] = 0b00001100;
+    }
+
+    if(tipo==2){
+
+        alto = 2;
+
+        forma[0] = 0b00011100;
+        forma[1] = 0b00001000;
+    }
+
     fila = 0;
 }
 
-void Pieza::moverIzquierda() {
+void Pieza::izquierda(){
 
-    forma <<= 1;
+    for(int i=0;i<alto;i++)
+        forma[i] <<=1;
 }
 
-void Pieza::moverDerecha() {
+void Pieza::derecha(){
 
-    forma >>= 1;
+    for(int i=0;i<alto;i++)
+        forma[i] >>=1;
 }
 
-void Pieza::bajar() {
+void Pieza::bajar(){
 
     fila++;
+}
+
+void Pieza::rotar(){
+
+    if(alto==2){
+
+        uint32_t temp = forma[0];
+        forma[0] = forma[1];
+        forma[1] = temp;
+    }
 }

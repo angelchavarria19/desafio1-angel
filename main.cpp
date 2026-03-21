@@ -1,54 +1,69 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 #include "tablero.h"
 #include "pieza.h"
 
 using namespace std;
 
-int main() {
+int main(){
 
-    int ancho, alto;
+    srand(time(0));
 
-    cout << "Ancho del tablero: ";
-    cin >> ancho;
+    int ancho,alto;
 
-    cout << "Alto del tablero: ";
-    cin >> alto;
+    cout<<"Ancho del tablero: ";
+    cin>>ancho;
 
-    Tablero tablero(ancho, alto);
+    cout<<"Alto del tablero: ";
+    cin>>alto;
+
+    if(ancho<8 || alto<8 || ancho%8!=0){
+
+        cout<<"Dimensiones invalidas"<<endl;
+        return 0;
+    }
+
+    Tablero tablero(ancho,alto);
 
     Pieza pieza;
 
-    char opcion;
+    char op;
 
-    while(true) {
+    while(true){
 
-        tablero.imprimir();
+        tablero.imprimir(pieza.forma,pieza.fila,pieza.alto);
 
-        cout << "a izquierda | d derecha | s bajar: ";
-        cin >> opcion;
+        cout<<"a izquierda | d derecha | s bajar | r rotar : ";
+        cin>>op;
 
-        if(opcion == 'a')
-            pieza.moverIzquierda();
+        if(op=='a')
+            pieza.izquierda();
 
-        if(opcion == 'd')
-            pieza.moverDerecha();
+        if(op=='d')
+            pieza.derecha();
 
-        if(opcion == 's')
+        if(op=='s')
             pieza.bajar();
 
-        if(tablero.detectarColision(pieza.forma, pieza.fila)) {
+        if(op=='r')
+            pieza.rotar();
+
+        if(tablero.colision(pieza.forma,pieza.fila,pieza.alto)){
 
             pieza.fila--;
-            tablero.fijarPieza(pieza.forma, pieza.fila);
 
-            tablero.limpiarFilas();
+            tablero.fijar(pieza.forma,pieza.fila,pieza.alto);
+
+            tablero.limpiar();
 
             pieza = Pieza();
         }
 
-        if(tablero.gameOver()) {
+        if(tablero.gameOver()){
 
-            cout << "GAME OVER" << endl;
+            cout<<"GAME OVER"<<endl;
             break;
         }
     }

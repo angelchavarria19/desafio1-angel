@@ -3,18 +3,20 @@
 
 #include <cstdint>
 
-class Pieza {
+class Pieza{
 
 public:
 
-    uint32_t forma;
+    uint32_t forma[4];
+    int alto;
     int fila;
 
     Pieza();
 
-    void moverIzquierda();
-    void moverDerecha();
+    void izquierda();
+    void derecha();
     void bajar();
+    void rotar();
 };
 
 #endif
