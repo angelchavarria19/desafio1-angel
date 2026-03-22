@@ -16,6 +16,7 @@ public:
     void izquierda();
     void derecha();
     void bajar();
+
     void rotar();
 };
 

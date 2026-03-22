@@ -50,6 +50,8 @@ int main(){
         if(op=='r')
             pieza.rotar();
 
+        pieza.bajar(); // caída automática
+
         if(tablero.colision(pieza.forma,pieza.fila,pieza.alto)){
 
             pieza.fila--;
